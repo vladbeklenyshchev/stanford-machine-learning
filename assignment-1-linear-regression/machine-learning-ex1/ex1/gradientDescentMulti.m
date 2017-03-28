@@ -15,15 +15,19 @@ for iter = 1:num_iters
     %
     % Hint: While debugging, it can be useful to print out the values
     %       of the cost function (computeCostMulti) and gradient here.
-    %      
+    %
+    theta_prev = theta; % simultaneously!!!
+    
     for j=1:size(X, 2)
-        sigma = (1/m)* (X * theta - y).* X(:, j);
-        theta(j)= theta(j) - alpha * sigma;
+        sigma = (1/m)* (X * theta_prev - y)' * X(:, j);
+        theta(j)= theta_prev(j) - alpha * sigma;
     end;
+    iter
+    theta
     % Save the cost J in every iteration    
-    J_history(iter) = computeCostMulti(X, y, theta);
+    J_history(iter) = computeCostMulti(X, y, theta)
     % ============================================================
     
-end
+end;
 
 end
